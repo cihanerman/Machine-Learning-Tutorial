@@ -21,4 +21,5 @@ y_head = rf.predict(x)
 #endregion
 #region r_square
 print 'r_score: ', r2_score(y,y_head)
+print 'r_score: ',rf.score(x, y)
 #endregion
