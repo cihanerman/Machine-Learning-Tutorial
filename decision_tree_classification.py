@@ -39,5 +39,5 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.15, rand
 #region native bayes
 dtc = DecisionTreeClassifier()
 dtc.fit(x_train, y_train) # fit etme işlemi model oluşturmak için kullanılıyor. datadaki tüm değerleri 0 ila 1 arsında birdeğere eşitliyor.
-print 'accuracy of naive bayes: ',dtc.score(x_test, y_test)
+print 'accuracy of naive decision tree: ',dtc.score(x_test, y_test)
 #endregion
