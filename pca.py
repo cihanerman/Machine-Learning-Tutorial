@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# %%
 #region import library
 import pandas as pd
 from sklearn.datasets import load_iris
@@ -19,8 +20,8 @@ x = data
 pca = PCA(n_components= 2, whiten= True) # n_components: düşürülmek istenen boyutsayısı. whiten= True: normalize et anlamı taşıyor
 pca.fit(x) # bu örnek için 4 boyutlu datayı 2 boyuta düşür analamı taşıyor
 x_pca = pca.transform(x) # boyut düşürme işlemi burada gerçekleşiyor
-print 'variance ratio: ',pca.explained_variance_ratio_
-print 'sum: ',sum(pca.explained_variance_ratio_) # varyans
+print ('variance ratio: ',pca.explained_variance_ratio_)
+print ('sum: ',sum(pca.explained_variance_ratio_)) # varyans
 #endregion
 #region Virtualize
 df['p1'] = x_pca[:,0]

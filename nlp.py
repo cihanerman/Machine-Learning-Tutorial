@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#%%
 #region import library
 import pandas as pd
 import numpy as np
@@ -19,10 +20,10 @@ data.gender = [1 if each == 'female' else 0 for each in data.gender] # classific
 #region cleaning data
 # regular expression
 data_description = data.description[4]
-print data_description
+# print data_description
 description = re.sub('[^a-zA-Z]', ' ', data_description) # ^ işareti bulma anlamına geliyor
 description = description.lower()
-print description
+# print description
 #endregion
 #region stopwords (irrelavant words) gereksiz kelimeler öğr: the, and, as vb.
 # nltk.download('stopwords')
@@ -30,16 +31,16 @@ print description
 # nlp.download('wordnet')
 # description = description.split()
 description = nlp.word_tokenize(description) # split yerine kullanıyoruz grmeri de algılayarak bölme işlemi yapıyor öğrn: isn't = > ['is','not']
-print description
+# print description
 description = [word for word in description if not word in set(stopwords.words('english'))] # set unique olanları bul
-print description
+# print description
 #endregion
 #region lemmatization loved = > love, gitmek = > git. Kelimelerin köklerini bulmak
 lemma = nlp.WordNetLemmatizer()
 description = [lemma.lemmatize(word) for word in description]
-print description
+# print description
 description = ' '.join(description)
-print description
+# print description
 #endregion
 #region All data cleaning
 description_list = []
@@ -70,6 +71,6 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.1, rando
 gnb = GaussianNB()
 gnb.fit(x_train,y_train)
 y_pre = gnb.predict(x_test)
-print 'accuracy : ',gnb.score(y_pre.reshape(-1,1), y_test)
-print 'accuracy : ',gnb.score(x_test, y_test)
+print ('accuracy : ',gnb.score(y_pre.reshape(-1,1), y_test))
+print ('accuracy : ',gnb.score(x_test, y_test))
 #endregion
