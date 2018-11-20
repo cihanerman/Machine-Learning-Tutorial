@@ -3,8 +3,9 @@
 from sklearn.datasets import load_iris
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 #%% import data
 iris = load_iris()
 # print(iris)
@@ -24,6 +25,28 @@ print('average std: ', np.std(accuracies)) # yayılım
 #%% knn model test
 knn.fit(x_train, y_train)
 print('test accuracy: ',knn.score(x_test, y_test))
+#%% grid search cross validation
+grid = {'n_neighbors':np.arange(1,50)}
+knn = KNeighborsClassifier()
+knn_cv = GridSearchCV(knn, grid, cv = 10)
+knn_cv.fit(x,y)
+#%% print hyperparemeter and accuracy KNN
+print('tuned hyperparameter k: ', knn_cv.best_params_)
+print('best accuracy: ', knn_cv.best_score_)
+
+
+#%% print hyperparemeter and accuracy logistic regression
+x = x[:100,:]
+y = y[:100] 
+
+grid = {"C":np.logspace(-3,3,7),"penalty":["l1","l2"]}  # l1 = lasso ve l2 = ridge
+
+logreg = LogisticRegression()
+logreg_cv = GridSearchCV(logreg, grid, cv = 10)
+logreg_cv.fit(x_train, y_train)
+print('tuned hyperparameter k: ', logreg_cv.best_params_)
+print('best accuracy: ', logreg_cv.best_score_)
+print('accuracy: ', logreg_cv.score(x_test, y_test))
 
 
 #%%
